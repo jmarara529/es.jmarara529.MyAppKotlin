@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MiAppKotlin</string>
+    <string name="media_del_alumno">Media del Alumno</string>
+    <string name="matem_ticas">Matemáticas</string>
+    <string name="fisica">Fisica</string>
+    <string name="quimica">Química</string>
+    <string name="evaluar">Evaluar</string>
+</resources>
