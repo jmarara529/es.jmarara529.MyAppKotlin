@@ -5,4 +5,5 @@
     <string name="fisica">Fisica</string>
     <string name="quimica">Química</string>
     <string name="evaluar">Evaluar</string>
+    <string name="tu_media_es">Tu media es: </string>
 </resources>

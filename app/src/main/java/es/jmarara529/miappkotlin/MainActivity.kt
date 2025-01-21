@@ -1,7 +1,6 @@
 package es.jmarara529.miappkotlin
 
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import es.jmarara529.miappkotlin.databinding.ActivityMainBinding
-import kotlin.math.log
+import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -26,6 +25,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.calcular.setOnClickListener(this)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
     }
 
@@ -36,9 +40,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 Log.d("Boton calcular", "Botón pulsado")
 
-                val inputMath = binding.editTextTextMatematicas.text.toString().toIntOrNull()
-                val inputFisica = binding.editTextTextFisica.text.toString().toIntOrNull()
-                val inputQuimica = binding.editTextquimica.text.toString().toIntOrNull()
+                val inputMath= binding.editTextTextMatematicas.text.toString().toDoubleOrNull()
+                val inputFisica = binding.editTextTextFisica.text.toString().toDoubleOrNull()
+                val inputQuimica = binding.editTextquimica.text.toString().toDoubleOrNull()
 
                 if ( inputMath == null || inputFisica == null || inputQuimica == null  ) {
                     Toast.makeText(
@@ -56,9 +60,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     return
                 }
 
-            val media = (inputMath + inputFisica + inputQuimica) / 3
+                val media= (inputMath + inputFisica + inputQuimica) / 3
+                val mediaBigDecimal = BigDecimal(media)
+                val mediaRedondeada = mediaBigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP)
 
-                binding.resultado.setText("Tu media es: $media")
+
+                binding.resultado.text= getString(R.string.tu_media_es) + " " + mediaRedondeada
 
             }
         }
